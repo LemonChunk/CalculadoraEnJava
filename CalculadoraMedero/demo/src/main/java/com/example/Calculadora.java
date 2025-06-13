@@ -1,6 +1,13 @@
 
 package com.example;
+
 public class Calculadora implements Operaciones {
+
+    private final ServicioMatematico servicio;
+
+    public Calculadora(ServicioMatematico servicio) {
+        this.servicio = servicio;
+    }
 
     @Override
     public int sumar(int a, int b) {
@@ -27,21 +34,11 @@ public class Calculadora implements Operaciones {
 
     @Override
     public int potencia(int base, int exponente) {
-        return (int) Math.pow(base, exponente);
+        return servicio.potencia(base, exponente);
     }
 
     @Override
-    public int factorial(int numero) throws IllegalArgumentException {
-        if (numero < 0) {
-            throw new IllegalArgumentException("El número debe ser no negativo");
-        }
-        if (numero == 0 || numero == 1) {
-            return 1;
-        }
-        int resultado = 1;
-        for (int i = 2; i <= numero; i++) {
-            resultado *= i;
-        }
-        return resultado;
+    public int factorial(int numero) {
+        return servicio.factorial(numero);
     }
 }
